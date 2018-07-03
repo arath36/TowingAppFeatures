@@ -14,6 +14,8 @@
 		4539596020EAF42F0040CB7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4539595E20EAF42F0040CB7F /* LaunchScreen.storyboard */; };
 		4539596B20EAF42F0040CB7F /* FeaturesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4539596A20EAF42F0040CB7F /* FeaturesTests.swift */; };
 		4539597620EAF42F0040CB7F /* FeaturesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4539597520EAF42F0040CB7F /* FeaturesUITests.swift */; };
+		4539598420EBFD390040CB7F /* TouchIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4539598320EBFD390040CB7F /* TouchIDViewController.swift */; };
+		4539598620EBFD6B0040CB7F /* VoiceToTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4539598520EBFD6B0040CB7F /* VoiceToTextViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		4539597120EAF42F0040CB7F /* FeaturesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeaturesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4539597520EAF42F0040CB7F /* FeaturesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesUITests.swift; sourceTree = "<group>"; };
 		4539597720EAF42F0040CB7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4539598320EBFD390040CB7F /* TouchIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIDViewController.swift; sourceTree = "<group>"; };
+		4539598520EBFD6B0040CB7F /* VoiceToTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceToTextViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 				4539595520EAF42E0040CB7F /* AppDelegate.swift */,
 				4539595720EAF42E0040CB7F /* ViewController.swift */,
 				4539595920EAF42E0040CB7F /* Main.storyboard */,
+				4539598520EBFD6B0040CB7F /* VoiceToTextViewController.swift */,
+				4539598320EBFD390040CB7F /* TouchIDViewController.swift */,
 				4539595C20EAF42F0040CB7F /* Assets.xcassets */,
 				4539595E20EAF42F0040CB7F /* LaunchScreen.storyboard */,
 				4539596120EAF42F0040CB7F /* Info.plist */,
@@ -257,7 +263,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4539595820EAF42E0040CB7F /* ViewController.swift in Sources */,
+				4539598420EBFD390040CB7F /* TouchIDViewController.swift in Sources */,
 				4539595620EAF42E0040CB7F /* AppDelegate.swift in Sources */,
+				4539598620EBFD6B0040CB7F /* VoiceToTextViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,7 +439,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 999PLS5M48;
 				INFOPLIST_FILE = Features/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -448,7 +458,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 999PLS5M48;
 				INFOPLIST_FILE = Features/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
