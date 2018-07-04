@@ -14,7 +14,22 @@ class TouchIDViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let context:LAContext = LAContext()
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+            context.localizedFallbackTitle = ""
+            context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Log in with Touch ID") { (correct, Error) in
+                if correct {
+                    print ("correct")
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "AuthenticateSegue", sender: nil)
+                    }
+                } else {
+                    print ("incorrect")
+                }
+            }
+        } else {
+            
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -23,22 +38,8 @@ class TouchIDViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    @IBAction func testTouch(_ sender: Any) {
-        let context:LAContext = LAContext()
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
-            context.localizedFallbackTitle = ""
-            context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "test") { (correct, Error) in
-                if correct {
-                    print ("correct")
-                } else {
-                    print ("incorrect")
-                }
-            }
-        } else {
-            print ("doesn't support biometrics")
-        }
-    }
     
+
 
     /*
     // MARK: - Navigation
