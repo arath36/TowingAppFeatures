@@ -9,15 +9,16 @@
 import UIKit
 import LocalAuthentication
 
-class TouchIDViewController: UIViewController {
+class TouchIDViewController: UIViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var textField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let context:LAContext = LAContext()
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
             context.localizedFallbackTitle = ""
-            context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Log in with Touch ID") { (correct, Error) in
+            context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "You can turn off touch ID in settings") { (correct, Error) in
                 if correct {
                     print ("correct")
                     DispatchQueue.main.async {
@@ -39,7 +40,24 @@ class TouchIDViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func goButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "AuthenticateSegue", sender: nil)
+    }
+    @IBAction func textFieldChange(_ sender: Any) {
+        maxLength(textFieldName: textField, maxLength: 4)
+        
+    }
+    
+    func maxLength (textFieldName: UITextField, maxLength: Int8) {
+        var length: Int? = textFieldName.text?.characters.count
+        var text = textFieldName.text
+        
+        if let length = length {
+            if length > maxLength {
+  
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation
