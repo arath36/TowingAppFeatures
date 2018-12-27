@@ -11,31 +11,39 @@ import LocalAuthentication
 
 class TouchIDViewController: UIViewController, UITextFieldDelegate {
     
+    
+    
     @IBOutlet weak var textField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let context:LAContext = LAContext()
-        // evaluates if device supports touch ID
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
-            context.localizedFallbackTitle = ""
-            // touch ID pop up 
-            context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "You can turn off touch ID in settings") { (correct, Error) in
-                if correct {
-                    // performed when correct fingerprint is detected
-                    print ("correct")
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "AuthenticateSegue", sender: nil)
+        
+                let context:LAContext = LAContext()
+                // evaluates if device supports touch ID
+                if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+                    // evauluates if touchID has been enabled by user
+                    if let touchIDCheck = UserDefaults.standard.object(forKey: "touchID") {
+                        if touchIDCheck as! Bool == true {
+                                    context.localizedFallbackTitle = ""
+                                    // touch ID authentication pop up
+                                    context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "You can turn off touch ID in settings") { (correct, Error) in
+                                        if correct {
+                                            // segues to next storyboard when correct finger print is detected
+                                            DispatchQueue.main.async {
+                                                self.performSegue(withIdentifier: "AuthenticateSegue", sender: nil)
+                                            }
+                                        } else {
+                                            // nothing when incorrect fingerprint is detected. Automatically quits after 3 failed attempts
+                                        }
+                                    }
+                        }
                     }
                 } else {
-                    print ("incorrect")
+                    // nothing if device doesn't support touchID
                 }
-            }
-        } else {
-            // no pop up if device doesn't support touch ID
-        }
-
-        // Do any additional setup after loading the view.
+                // sets text field delegate to TouchIDViewController
+                textField.delegate = self
+                // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,23 +52,30 @@ class TouchIDViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func goButtonPressed(_ sender: Any) {
-        // segues to voice to text storyboard for dev purposes
+        // segues to next storyboard for dev purposes
+        if textField.text == "1234" {
         performSegue(withIdentifier: "AuthenticateSegue", sender: nil)
-    }
-    @IBAction func textFieldChange(_ sender: Any) {
-        
+        } else {
+            
+            // error alert if wrong password is pressed
+            let alert = UIAlertController(title: "Error", message: "Passcode is incorrect", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alert.addAction(action)
+           present(alert, animated: true, completion: nil)
+        }
     }
     
+    
+    // limits characters in the UITextField to 4
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        
+        return updatedText.count <= 4
+    }
   
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
